@@ -4,7 +4,7 @@
 
 void display_int_array(Int_Array *array)
 {
-  for (Index i = 0; i < array->length; i++)
+  FOR(0, array->length)
   {
     printf("%d ", array->values[i]);
   }
@@ -13,7 +13,7 @@ void display_int_array(Int_Array *array)
 
 void display_int_array_of_arrays(Int_Array *array_of_arrays, int length)
 {
-  for (Index i = 0; i < length; i++)
+  FOR(0, length)
   {
     display_int_array(&array_of_arrays[i]);
   }
@@ -24,7 +24,7 @@ Int_Array *create_int_array(int *numbers, int length)
   Int_Array *array = (Int_Array *)malloc(sizeof(Int_Array));
   array->length = length;
   array->values = (int *)malloc(sizeof(int) * length);
-  for (Index i = 0; i < length; i++)
+  FOR(0, length)
   {
     array->values[i] = numbers[i];
   }
@@ -41,7 +41,7 @@ Int_Array *seperated_by_range(int *numbers, int length, int start_from, int upto
   Index in_the_range_count = 0;
   Index above_the_range_count = 0;
 
-  for (Index i = 0; i < length; i++)
+  FOR(0, length)
   {
     int num = numbers[i];
     if (num < start_from)

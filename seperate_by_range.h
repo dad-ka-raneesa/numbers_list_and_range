@@ -1,6 +1,8 @@
 #ifndef __RANGE_H_
 #define __RANGE_H_
 
+#define FOR(start, limit) for (Index i = start; i < limit; i++)
+
 typedef unsigned int Index;
 typedef struct
 {
