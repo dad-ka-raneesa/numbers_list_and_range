@@ -1,6 +1,7 @@
 {
   "files.associations": {
     "stdio.h": "c",
-    "seperate_by_range.h": "c"
+    "seperate_by_range.h": "c",
+    "stdlib.h": "c"
   }
 }
