@@ -31,6 +31,15 @@ Int_Array *create_int_array(int *numbers, int length)
   return array;
 }
 
+Position find_position(int number, int start_from, int upto)
+{
+  if (number < start_from)
+    return BELOW;
+  if (number > upto)
+    return ABOVE;
+  return IN;
+}
+
 Int_Arrays seperated_by_range(int *numbers, int length, int start_from, int upto)
 {
   int temp_ranges[3][length];
@@ -40,7 +49,7 @@ Int_Arrays seperated_by_range(int *numbers, int length, int start_from, int upto
   FOR(0, length)
   {
     int num = numbers[i];
-    pos = num < start_from ? BELOW : num > upto ? ABOVE : IN;
+    pos = find_position(num, start_from, upto);
     temp_ranges[pos][lengths[pos]] = num;
     lengths[pos] += 1;
   }
