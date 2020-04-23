@@ -11,7 +11,7 @@ void display_int_array(Int_Array *array)
   printf("\n");
 }
 
-void display_int_array_of_arrays(Int_Array *array_of_arrays, int length)
+void display_int_array_of_arrays(Int_Arrays array_of_arrays, int length)
 {
   FOR(0, length)
   {
@@ -31,40 +31,24 @@ Int_Array *create_int_array(int *numbers, int length)
   return array;
 }
 
-Int_Array *seperated_by_range(int *numbers, int length, int start_from, int upto)
+Int_Arrays seperated_by_range(int *numbers, int length, int start_from, int upto)
 {
-  int below_the_range[length];
-  int in_the_range[length];
-  int above_the_range[length];
-
-  Index below_the_range_count = 0;
-  Index in_the_range_count = 0;
-  Index above_the_range_count = 0;
+  int temp_ranges[3][length];
+  int lengths[] = {0, 0, 0};
+  Position pos;
 
   FOR(0, length)
   {
     int num = numbers[i];
-    if (num < start_from)
-    {
-      below_the_range[below_the_range_count] = num;
-      below_the_range_count++;
-    }
-    else if (num > upto)
-    {
-      above_the_range[above_the_range_count] = num;
-      above_the_range_count++;
-    }
-    else
-    {
-      in_the_range[in_the_range_count] = num;
-      in_the_range_count++;
-    }
+    pos = num < start_from ? BELOW : num > upto ? ABOVE : IN;
+    temp_ranges[pos][lengths[pos]] = num;
+    lengths[pos] += 1;
   }
 
-  Int_Array *seperated_arrays = (Int_Array *)malloc(sizeof(Int_Array) * 3);
-  seperated_arrays[0] = *create_int_array(below_the_range, below_the_range_count);
-  seperated_arrays[1] = *create_int_array(in_the_range, in_the_range_count);
-  seperated_arrays[2] = *create_int_array(above_the_range, above_the_range_count);
-
+  Int_Arrays seperated_arrays = (Int_Arrays)malloc(sizeof(Int_Arrays) * 3);
+  FOR(0, 3)
+  {
+    seperated_arrays[i] = *create_int_array(temp_ranges[i], lengths[i]);
+  }
   return seperated_arrays;
 }
